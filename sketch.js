@@ -16,7 +16,7 @@ const rainbowColors = [
   "#9400D3", // Violet (Brighter)
   "#7B009E", // Violet (Darker)
 ];
-let lines = 50;
+let lines = 12;
 const sounds = [];
 let ballsStarted = 0;
 const drawBalls = () => {
@@ -73,6 +73,7 @@ function onLinesChanged() {
     );
   }
   ballsStarted = 0;
+  linesDisplay.html(`${lines} number of balls`);
 }
 
 function toggleSound() {
