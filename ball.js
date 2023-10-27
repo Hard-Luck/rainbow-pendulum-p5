@@ -1,32 +1,32 @@
 class Ball {
-  x: number;
-  y: number;
-  radius: number;
-  theta: number;
-  direction: number;
-
-  constructor(startX: number, startY: number) {
+  constructor(startX, startY, colour, sound) {
     this.x = startX;
     this.y = startY;
     this.radius = abs(this.x);
     this.theta = PI;
     this.direction = 1;
+    this.colour = colour;
+    this.sound = sound;
+    this.moving = false;
   }
 
   draw() {
-    fill(255);
+    fill(this.colour);
     circle(this.x, this.y, ballSize);
   }
 
   updatePosition() {
-    const deltaTheta = 1 / this.radius;
+    if (!this.moving) return;
+    const deltaTheta = this.radius / 31415;
 
     this.theta += deltaTheta * this.direction;
 
     if (this.theta > 2 * PI) {
+      soundOn && this.sound.play();
       this.direction = -1;
       this.theta = 2 * PI - (this.theta % PI);
     } else if (this.theta <= PI) {
+      soundOn && this.sound.play();
       this.direction = 1;
       this.theta = PI + abs(PI - this.theta);
     }
